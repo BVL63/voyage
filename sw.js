@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='voyage-shell-v065';
+const CACHE='voyage-shell-v066';
 const CDN='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.89.0/dist/umd/supabase.js';
 const ROOT=self.registration.scope;
 const HOME=new URL('index.html',ROOT).href;
@@ -7,7 +7,7 @@ const FILES=['manifest.webmanifest','icon-192.png','icon-512.png'].map(x=>new UR
 self.addEventListener('install',e=>e.waitUntil((async()=>{
  const c=await caches.open(CACHE);
  const h=await fetch(HOME,{cache:'reload'});
- if(!h.ok||!(await h.clone().text()).includes('v0.6.5'))throw Error('App shell not published yet');
+ if(!h.ok||!(await h.clone().text()).includes('v0.6.6'))throw Error('App shell not published yet');
  await c.put(HOME,h.clone());await c.put(ROOT,h.clone());
  await Promise.allSettled(FILES.map(async x=>{const r=await fetch(x,{cache:'reload'});if(r.ok)await c.put(x,r)}));
  try{const r=await fetch(CDN,{cache:'reload',mode:'cors'});if(r.ok)await c.put(CDN,r)}catch(_){}
